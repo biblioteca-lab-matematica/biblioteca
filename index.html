@@ -79,14 +79,23 @@ function mostrarLista(listaGeneros) {
 }
 
 // busca em tempo real
-document.getElementById("busca").addEventListener("input", (e) => {
-  const texto = e.target.value.toLowerCase();
+function normalizarTexto(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-  const filtrados = generos.filter(g =>
-    g.toLowerCase().includes(texto)
+document.getElementById("busca").addEventListener("input", (e) => {
+  const texto = normalizarTexto(e.target.value);
+
+  const filtrados = livrosFiltrados.filter(l =>
+    normalizarTexto(l.titulo).includes(texto) ||
+    normalizarTexto(l.autor).includes(texto) ||
+    normalizarTexto(l.etiqueta).includes(texto)
   );
 
-  mostrarLista(filtrados);
+  mostrarLivros(filtrados);
 });
 </script>
 
