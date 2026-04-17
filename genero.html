@@ -99,7 +99,7 @@ function mostrarLivros(listaLivros) {
     const li = document.createElement("li");
 
     li.textContent =
-      `${livro.titulo} (${livro.autor})`;
+      `${livro.titulo} (${livro.autor})`; 
 
     li.onclick = () => {
       window.location.href =
@@ -111,13 +111,20 @@ function mostrarLivros(listaLivros) {
 }
 
 // 🔍 busca em tempo real
+function normalizarTexto(texto) {
+  return (texto || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 document.getElementById("busca").addEventListener("input", (e) => {
-  const texto = e.target.value.toLowerCase();
+  const texto = normalizarTexto(e.target.value);
 
   const filtrados = livrosFiltrados.filter(l =>
-    l.titulo.toLowerCase().includes(texto) ||
-    l.autor.toLowerCase().includes(texto) ||
-    l.etiqueta.toLowerCase().includes(texto)
+    normalizarTexto(l.titulo).includes(texto) ||
+    normalizarTexto(l.autor).includes(texto) ||
+    normalizarTexto(l.etiqueta).includes(texto)
   );
 
   mostrarLivros(filtrados);
