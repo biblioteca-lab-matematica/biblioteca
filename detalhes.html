@@ -64,7 +64,9 @@ fetch(API)
   .then(res => res.json())
   .then(livros => {
 
-    const livro = livros.find(l => l.id == id);
+    const livro = livros.find(l =>
+  String(l.id).trim() === String(id).trim()
+);
 
     if (livro) {
       document.getElementById("titulo").textContent = livro.titulo;
