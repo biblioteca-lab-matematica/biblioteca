@@ -112,8 +112,8 @@ function mostrarLivros(listaLivros) {
       `${livro.titulo} (${livro.autor})`; 
 
     li.onclick = () => {
-      window.location.href =
-       `detalhes.html?titulo=${encodeURIComponent(livro.titulo)}
+    window.location.href =
+      `detalhes.html?id=${livro.id}
 &genero=${encodeURIComponent(genero)}
 &subgenero=${encodeURIComponent(subgenero || "")}`;
     };
