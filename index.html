@@ -70,9 +70,22 @@ function mostrarLista(listaGeneros) {
     li.textContent = genero;
 
     li.onclick = () => {
-      window.location.href =
-        `genero.html?genero=${encodeURIComponent(genero)}`;
-    };
+
+  // verifica se existe subgênero
+  const temSubgenero = livros.some(l =>
+    l.genero === genero &&
+    l.subgenero &&
+    l.subgenero.trim() !== ""
+  );
+
+  if (temSubgenero) {
+    window.location.href =
+      `subgenero.html?genero=${encodeURIComponent(genero)}`;
+  } else {
+    window.location.href =
+      `genero.html?genero=${encodeURIComponent(genero)}`;
+  }
+};
 
     lista.appendChild(li);
   });
