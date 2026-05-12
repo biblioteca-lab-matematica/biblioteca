@@ -82,14 +82,14 @@ fetch(API)
   .then(livros => {
 
     // filtra por gênero (com trim pra evitar erro)
-  livrosFiltrados = livros.filter(l => {
+ livrosFiltrados = livros.filter(l => {
 
   const generoOk =
     l.genero?.trim() === genero;
 
   const subgeneroOk =
     !subgenero ||
-    l.subgenero?.trim() === subgenero;
+    l.subgenero?.trim() === subgenero?.trim();
 
   return generoOk && subgeneroOk;
 });
