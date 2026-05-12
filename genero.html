@@ -66,7 +66,8 @@ const genero = params.get("genero");
 const subgenero = params.get("subgenero");
 
 // título da página
-document.getElementById("titulo").textContent = genero;
+document.getElementById("titulo").textContent =
+  subgenero || genero;
 
 // botão voltar correto
 document.getElementById("voltar").href =
