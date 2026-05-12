@@ -2,33 +2,73 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Biblioteca</title>
-  
+
   <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+    body {
+      margin: 0;
+      padding: 15px;
+      font-family: Arial, sans-serif;
 
-  background-image: url("img/fundo.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+      background-image: url("img/fundo.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
 
-  color: white;
-}
+      color: white;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-</style>
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
+
+    body * {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 400px;
+    }
+
+    li {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    li:hover {
+      background: rgba(255,255,255,0.25);
+    }
+  </style>
 </head>
+
 <body>
 
 <h1>📚 Biblioteca Laboratório de Matemática</h1>
@@ -38,83 +78,86 @@ body::before {
 <ul id="lista"></ul>
 
 <script>
+
 const API = "https://opensheet.elk.sh/1a11o7S72keD_L8AMTgj0gQjHXwQGuLFtYkn_iiOD3c0/Sheet1";
 
 let generos = [];
-
 let todosLivros = [];
 
-// carregar dados
-fetch(API)
-  .then(res => res.json())
-  .then(livros => {
-    todosLivros = livros;
-
-    // limpa e organiza os gêneros
-    generos = [...new Set(
-      livros
-        .map(l => l.genero?.trim()) // remove espaços
-        .filter(g => g)             // remove vazios
-    )];
-
-    mostrarLista(generos);
-  })
-  .catch(err => {
-    console.error("Erro ao carregar dados:", err);
-  });
-
-// função para mostrar lista
-function mostrarLista(listaGeneros) {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-
-  listaGeneros.forEach(genero => {
-    const li = document.createElement("li");
-    li.textContent = genero;
-
-li.onclick = () => {
-
-  const temSubgenero = todosLivros.some(l =>
-    l.genero?.trim() === genero &&
-    l.subgenero &&
-    l.subgenero.trim() !== ""
-  );
-
-  if (temSubgenero) {
-
-    window.location.href =
-      `subgenero.html?genero=${encodeURIComponent(genero)}`;
-
-  } else {
-
-    window.location.href =
-      `genero.html?genero=${encodeURIComponent(genero)}`;
-  }
-};
-
-    lista.appendChild(li);
-  });
-}
-
-// busca em tempo real
 function normalizarTexto(texto) {
-  return texto
+  return (texto || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+fetch(API)
+  .then(res => res.json())
+  .then(livros => {
+
+    // salva todos os livros
+    todosLivros = livros;
+
+    // pega gêneros únicos
+    generos = [...new Set(
+      livros
+        .map(l => l.genero?.trim())
+        .filter(g => g)
+    )];
+
+    mostrarLista(generos);
+  });
+
+function mostrarLista(listaGeneros) {
+
+  const lista = document.getElementById("lista");
+
+  lista.innerHTML = "";
+
+  listaGeneros.forEach(genero => {
+
+    const li = document.createElement("li");
+
+    li.textContent = genero;
+
+    li.onclick = () => {
+
+      // verifica se existe subgênero
+      const temSubgenero = todosLivros.some(l =>
+        l.genero?.trim() === genero &&
+        l.subgenero &&
+        l.subgenero.trim() !== ""
+      );
+
+      // decide para onde vai
+      if (temSubgenero) {
+
+        window.location.href =
+          `subgenero.html?genero=${encodeURIComponent(genero)}`;
+
+      } else {
+
+        window.location.href =
+          `genero.html?genero=${encodeURIComponent(genero)}`;
+      }
+    };
+
+    lista.appendChild(li);
+  });
+}
+
+// busca
 document.getElementById("busca").addEventListener("input", (e) => {
+
   const texto = normalizarTexto(e.target.value);
 
-  const filtrados = livrosFiltrados.filter(l =>
-    normalizarTexto(l.titulo).includes(texto) ||
-    normalizarTexto(l.autor).includes(texto) ||
-    normalizarTexto(l.etiqueta).includes(texto)
+  const filtrados = generos.filter(g =>
+    normalizarTexto(g).includes(texto)
   );
 
-  mostrarLivros(filtrados);
+  mostrarLista(filtrados);
 });
+
 </script>
 
 </body>
