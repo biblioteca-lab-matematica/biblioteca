@@ -113,7 +113,9 @@ function mostrarLivros(listaLivros) {
 
     li.onclick = () => {
       window.location.href =
-        `detalhes.html?id=${livro.id}&genero=${encodeURIComponent(genero)}`;
+       `detalhes.html?titulo=${encodeURIComponent(livro.titulo)}
+&genero=${encodeURIComponent(genero)}
+&subgenero=${encodeURIComponent(subgenero || "")}`;
     };
 
     lista.appendChild(li);
