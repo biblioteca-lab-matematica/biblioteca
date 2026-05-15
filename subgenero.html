@@ -51,7 +51,7 @@ input {
 
 <body>
 
-<a href="index.html">⬅ Voltar</a>
+<a href="voltar">⬅ Voltar</a>
 
 <h1 id="titulo"></h1>
 
@@ -62,6 +62,8 @@ const API = "https://opensheet.elk.sh/1a11o7S72keD_L8AMTgj0gQjHXwQGuLFtYkn_iiOD3
 
 const params = new URLSearchParams(window.location.search);
 const genero = params.get("genero");
+   document.getElementById("voltar").href =
+  "index.html";
 
 document.getElementById("titulo").textContent = genero;
 
