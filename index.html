@@ -66,12 +66,46 @@
     li:hover {
       background: rgba(255,255,255,0.25);
     }
+    button {
+
+    width: 100%;
+    max-width: 300px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+
+    transition: 0.3s;
+}
+
+button:hover {
+
+    background: rgba(255,255,255,0.25);
+
+}
   </style>
 </head>
 
 <body>
 
 <h1>📚 Biblioteca Laboratório de Matemática</h1>
+<button id="informacoes">
+    📖 Informações da Biblioteca
+</button>
+
+<br><br>
 
 <input type="text" id="busca" placeholder="Buscar gênero...">
 
@@ -90,6 +124,9 @@ function normalizarTexto(texto) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 }
+  document.getElementById("informacoes").onclick = () => {
+    window.location.href = "informacoes.html";
+};
 
 fetch(API)
   .then(res => res.json())
