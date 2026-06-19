@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Informações</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+
+    background-image: url("img/fundo2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:0;
+}
+
+body *{
+    position:relative;
+    z-index:1;
+}
+
+.caixa{
+    background:rgba(0,0,0,.45);
+    padding:20px;
+    border-radius:12px;
+    max-width:900px;
+}
+
+a{
+    color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="index.html">⬅ Voltar</a>
+
+<div class="caixa">
+
+<h1>📚 Biblioteca do Laboratório de Matemática</h1>
+
+<h2>Como utilizar</h2>
+
+<p>
+Escreva aqui todas as instruções para utilização da biblioteca.
+</p>
+
+<h2>Empréstimos</h2>
+
+<p>
+Exemplo:
+Os livros podem permanecer emprestados por até 7 dias.
+</p>
+
+<h2>Localização</h2>
+
+<p>
+A etiqueta de cada livro possui o formato:
+</p>
+
+<p>
+<b>311-A6-P2-1/1</b>
+</p>
+
+<ul>
+<li>311 → Sala</li>
+<li>A6 → Armário</li>
+<li>P2 → Prateleira</li>
+<li>1/1 → Exemplar</li>
+</ul>
+
+<h2>Contato</h2>
+
+<p>
+Laboratório de Matemática<br>
+Universidade XXXXX
+</p>
+
+</div>
+
+</body>
+</html>
