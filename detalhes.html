@@ -73,7 +73,13 @@ fetch(API)
       document.getElementById("autor").textContent = livro.autor;
       document.getElementById("ano").textContent = livro.ano;
       document.getElementById("etiqueta").textContent = livro.etiqueta;
-      document.getElementById("imagem").src = livro.imagem;
+      const imagem = document.getElementById("imagem");
+
+imagem.src = livro.imagem;
+imagem.onerror = () => {
+  imagem.alt = "Imagem do livro indisponível";
+  imagem.style.display = "none";
+};
     }
   });
 </script>
