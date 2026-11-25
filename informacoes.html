@@ -30,6 +30,14 @@ body *{
     position:relative;
     z-index:1;
 }
+    p, li {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+h2 {
+    font-size: 23px;
+}
 
 .caixa{
     background:rgba(0,0,0,.45);
@@ -40,6 +48,33 @@ body *{
 
 a{
     color:white;
+}
+    @media (max-width: 600px) {
+
+    body {
+        font-size: 18px;
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    li {
+        font-size: 20px;
+        padding: 17px;
+    }
+
+    input {
+        font-size: 18px;
+        padding: 14px;
+    }
+
+    button {
+        font-size: 19px;
+        padding: 15px;
+    }
+
 }
 </style>
 
@@ -84,6 +119,7 @@ A etiqueta de cada livro possui o formato:
 <li>Px → Número da prateleira</li>
 <li>xx → Posição na prateleira</li>   
 <li>1/1 → Exemplar</li>
+<li>Exemplo: 311-A2-P3-33-2/3 "O livro está na sala 311, no armário 2, prateleira 3, na posição 33 e é o segundo exemplar de três 
 <li>Observação: Alguns livros terão uma etiqueta do tipo 311-A3-P5-6A-1/1 ou 311-A3-P4-6B-1/1. Isso significa que existem 2 grupos distintos de livros na mesma prateleira separados cada um em um lado
 O "A" referece ao lado direito da prateleira e o "B" ao esquerto</li>
 </ul>
